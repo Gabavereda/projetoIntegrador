@@ -1,0 +1,156 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#content {
+    flex-grow: 1;
+    padding-bottom: 40px;
+    /* Espaço para o rodapé */
+}
+
+#footer {
+    background-color: rgba(4, 19, 1, 0.801);
+    color: #f8f8f8;
+    box-shadow: 0 -5px 2px rgb(233, 9, 9);
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin-top: 2em;
+
+}
+.focused {
+    outline: 2px solid #28a745;
+    background-color: #dff0d8;
+}
+
+#mensagemCart {
+    position: absolute;
+    top: 37em;
+    left: 10px;
+    border-radius: 8px;
+
+}
+
+
+#buscaProdutos {
+    padding-right: 50em;
+}
+
+#campoBuscaDoNav {
+    width: 500px;
+    max-width: 100%;
+
+}
+
+
+#carrosante {
+    background-color: #9ba798ad;
+    width: auto;
+}
+
+
+/* Para o carrosel*/
+
+#carouselExampleAutoplaying {
+    margin-top: 1em;
+
+    max-width: 100%;
+    /* Garante centralização */
+
+}
+
+#carouselExampleAutoplaying .carousel-item img {
+
+    max-width:50em;
+    margin:  auto;
+
+}
+
+#carouselExampleAutoplaying .carousel-control-prev,
+#carouselExampleAutoplaying .carousel-control-next {
+    width: 35px;
+    background-color: rgba(255, 0, 0, 0.747);
+}
+
+#carouselExampleAutoplaying .carousel-control-prev {
+    left: 300px;
+    /* Ajusta a posição horizontal da seta esquerda */
+}
+
+#carouselExampleAutoplaying .carousel-control-next {
+    right: 300px;
+    /* Ajusta a posição horizontal da seta direita */
+}
+
+#btnCarrinho {
+    padding: 1em;
+    float: right;
+    margin-right: 20em;
+}
+
+/* Cards responsivos */
+
+.input-group{
+    text-align: center;
+    align-content: center;
+}
+
+
+#cardsProdutos .card-img-top {
+    width: 60%;
+    position: center;
+    margin: auto;
+}
+
+#cardsProdutos .card {
+    transition: transform 0.3s;
+    max-width:15em;
+
+
+    /* Garante que os cards não ultrapassem a largura máxima */
+    height: auto;
+
+}
+
+#cardsProdutos .card:hover {
+    transform: scale(1.05);
+}
+
+#cardsProdutos {
+    justify-content: start;
+    margin-top: 1em;
+
+}
+
+/* Estilo para o card-footer */
+#cardQuantidaPreco {
+    text-align: center;
+}
+
+.container-fluid.todosCards {
+    margin-top: 2em;
+    display: flex;
+
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .singleCard {
+        width: 65%;
+        /* Garante que os cards ocupem toda a largura disponível em telas pequenas */
+        max-width: 300px;
+        /* Define a largura máxima para os cards */
+        margin: 0 auto;
+        /* Centraliza os cards */
+    }
+}
+
+.fotoLogoSocial {
+    width: 2.2em;
+    height: 2.2em;
+}
