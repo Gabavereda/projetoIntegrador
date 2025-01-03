@@ -1,0 +1,233 @@
+<!doctype html>
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> 
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"> 
+
+        <link rel="stylesheet" th:href="@{/css/venda.css}" /> 
+        <title>loja-carrinho</title>
+    </head>
+
+    <body>
+
+        <div id="content">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" >Mini Mercado</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <!-- Navegação entre paginas -->
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" th:href="@{/produtos/cadastro}">Gestão Produtos</a>
+                            </li>          
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    Administrativo
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/fornecedores/cadastrar-fornecedor}">Fornecedores</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/funcionarios/cadastrar-funcionario}">Funcionários</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Relatorios(UpdatePiBanco)</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav me-2 mb-4 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"  th:href="@{/home-loja}">Ir para Loja</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Carrinho  -->
+
+            <div class="container-fluid" id="contentCarrinho" >
+
+                <div class="row">
+                    <h1>Seu Carrinho</h1>
+                    <div class="col-sm-6">
+                        <div id="ProdutoSelecionado">
+
+
+                            <!-- LADO ESQUERDO Carrinho  -->
+                            <div class="col-sm-4" id="cartItems">
+                                <div th:each="item : ${carrinho}" class="cart-item" data-name="${item.produto.id}">
+
+                                    <div class="card">
+                                        <div> <form th:action="@{/remover-carrinho}" method="post">
+                                                <input type="hidden" th:name="idProduto" th:value="${item.produto.id}" />
+                                                <button class="btn btn-danger" type="submit">Remover</button>
+                                            </form>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                                <img th:src="@{'/images/' + ${#strings.toLowerCase(item.produto.nome)} + '.png'}"  class="card-img-top" style="width: 100px; height: auto;" alt="imagemProdutos" />
+
+
+                                                <li class="list-group-item">
+                                                    <h4 class="card-title" th:text="${item.produto.nome}"></h4>
+                                                </li>
+
+
+                                                <li class="list-group-item">
+                                                    <p>Preço Unitário
+                                                        <span class="preco" th:text="${item.produto.preco}"></span></p>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p>Quantidade no carrinho
+                                                        <span class="quantidade" th:text="${item.quantidade}"></span></p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- LADO DiREITO Carrinho  -->
+                    <!-- aqui onde aparece o valor total -->
+                    <div class="col-sm-4">
+                        <div class="card" id="valorTotalDiv">
+                            <p class="card-title">Total Do Carrinho</p>
+                            <label  class="card-text" >Total: R$ <span  th:text="${total}"></span></label>
+                            <label>Total: R$ <span th:text="${total}"></span></label>
+                            <label>Total com Pix (10% off): R$ <span th:text="${totalComDescontoPix}"></span></label>
+                        </div>
+
+                        <!-- endereco -->
+
+                        <div class="mb-3" id="informarEndereco">
+                            <div class="form-label">
+                                <h3 class="text-center">Inserir Endereço</h3>
+                            </div>
+                            <div class="mb-2">
+                                <input class="form-control " type="text" id="labelTxt" placeholder="Rua">
+                            </div>
+                            <div class="mb-2">
+                                <input class="form-control  " type="text" id="labelTxt" placeholder="numero">
+                            </div>
+                            <div class="mb-2">
+                                <input class="form-control" type="text" id="labelTxt" placeholder="cep">
+                            </div>
+                        </div>
+                        <div class="container-fluid" id="selecaoPagamento">
+
+                            <!-- Radio forma de pagamento -->
+
+                            <div class="container-fluid" id="informarDados">
+                                <h2 class="">Escolha Forma de Pagamento</h2>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="labelTxt" name="opcoes-pagamento"
+                                           value="pix">
+                                    <label class="form-check-label" for="formaPagar1">PIX
+                                        <strong>10%off</strong></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="labelTxt" name="opcoes-pagamento"
+                                           value="cartao">
+                                    <label class="form-check-label" for="formaPagar2">Cartão de Crédito</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- container pix -->
+                        <div class="col-sm-6" id="divPix">
+                            <div class="col-md-12" id="inputCpf">
+                                <h2 id="tituloPix">Pix</h2>
+                                <label id="labelTxt" for="cpf">CPF:</label>
+                                <input type="text" name="cpfUsuario" id="cpf" required
+                                       title="Por favor preencha esse campo">
+                            </div>
+                            <div id="valorCalculadoPix">
+                                <label>Total com Pix (10% off) <br> R$ <span th:text="${totalComDescontoPix}"></span></label>
+                            </div>
+                            <div id="valorTotal">
+                                <button id="finalizarVendaPix" class="btn btn-outline-success btn-lg">Finalizar Compra via Pix</button>
+                            </div>
+                        </div>
+
+
+                        <div class="form row g-3" id="cartaoCredito">
+                            <div class="col-md-6" id="logoCartao">
+                                <h2 id="tituloCartao">Cartão de Crédito</h2>
+                                <div class="col-md-12">
+                                    <label for="numeroCartao" class="form-label">Número:</label>
+                                    <input type="text" id="numeroCartao" class="form-control">
+                                </div>
+                                <div class="col-md-2" id="bandeirasCartoes">
+                                    <img class="img-fluid" id="card1" th:src="@{/images/cartao1.png}" alt="logo1">
+                                    <img class="img-fluid" id="card2" th:src="@{/images/cartao2.png}" alt="logo2">
+                                </div>
+                                <span id="cartaoInvalido" style="font-size: medium; font-weight: bolder; color: red;">Cartão
+                                    inválido</span>
+                                <div class="col-md-12">
+                                    <label for="titularCartao" class="form-label"> Titular: </label>
+                                    <input type="text" id="titularCartao" class="form-control">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="csv" class="form-label">Cód. Segurança:</label>
+                                    <input type="text" id="csv" class="form-control">
+                                    <label for="vencimento" class="form-label">Vencimento:</label>
+                                    <input type="text" id="vencimento" class="form-control">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="selecionarParcelas" id="labelParcelas" class="form-label">Parcelas:</label>
+                                    <select name="atuacao" id="selecionarParcelas">
+                                        <option value="1x">1x</option>
+                                        <option value="2x">2x</option>
+                                        <option value="3x">3x</option>
+                                        <option value="4x">4x</option>
+                                        <option value="5x">5x</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid" id="valorCalculadoCartao">
+                                <div id="cartTotal">Total: R$ <span th:text="${total}"></span></div>
+                            </div>
+                            <br><br>
+                            <div class="d-grid gap-2">
+                                <button id="finalizarVendaCartao" class="btn btn-outline-success btn-lg">Finalizar Compra via Cartão</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer id="footer">
+            <div id="abaixo">
+                <div class="redeSociaisRodape">
+                    <div class="insta">
+                        <img class=" fotoLogoSocial" th:src="@{/images/insta.jpg}" alt="Insta">
+                        <img class="fotoLogoSocial" th:src="@{/images/face.jpg}" alt="FACE">
+                        <img class="fotoLogoSocial" th:src="@{/images/whats.jpg}" alt="whats">
+                    </div>
+                    <div class="contato">
+                        <p>minimercado@gmail.com</p>
+                        <p>Rua das lágrimas 515 </p>
+                        <p>CEP 09050-001 </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="js/venda.js"></script>
+    </body>
+</html>
