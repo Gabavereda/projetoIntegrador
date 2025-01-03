@@ -1,9 +1,83 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : 29 de dez. de 2024, 20:59:00
-    Author     : glaub
-*/
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+#content {
+    flex-grow: 1;
+    padding-bottom: 40px;
+    /* Espaço para o rodapé */
+
+}
+
+#footer {
+    background-color: rgba(4, 19, 1, 0.801);
+    color: #f8f8f8;
+
+    box-shadow: 0 -5px 2px rgb(233, 9, 9);
+
+    position: relative;
+    width: 100%;
+
+
+    text-align: center;
+    padding: 10px;
+    margin-top: 2em;
+    /* Garantir que o rodapé não grude no conteúdo */
+}
+
+.fotoLogoSocial {
+    width: 2.2em;
+    height: 2.2em;
+}
+
+/* NAV */
+
+
+/* CADASTRO */
+#formsFinal {
+    display: inline-block;
+    margin-top: 2em;
+    background-color: rgba(28, 129, 8, 0.801);
+}
+
+#formulario {
+    margin-top: 2em;
+    padding: 1em;
+}
+
+#floatingTextarea2 {
+    height: fit-content;
+}
+
+/* pesquisa*/
+
+#campoPesquisa {
+    display: inline;
+
+}
+
+#productNome {
+    width:35em;
+}
+
+#divBtn {
+    padding: 0.5em;
+}
+
+#tabelaMontada {
+    margin-top: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    text-align: left;
+
+}
+
+#tituloTable {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 24px;
+    text-align: left;
+}
