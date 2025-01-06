@@ -4,6 +4,8 @@
         <title>cadastro Produtos</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"> 
 
@@ -18,7 +20,7 @@
         <div id="content">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" >Mercado Da Vila</a>
+                    <a class="navbar-brand" >Mini Mercado</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +44,7 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Relatorios(UpdatePiBanco)</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/montarTabelaRelatorio}">Relatorios</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -57,7 +59,7 @@
             <div id="formsFinal" class="container-fluid">
                 <div class="row">
                     <div class="col-md-4">
-                        <form th:action="@{/produtos/edit/{id}(id=${produto.id})}" method="POST" id="formulario">
+                        <form th:action="@{/produtos/cadastro}" method="POST" id="formulario">
                             <div class="row g-3">
                                 <h1 >Cadastro de Produto</h1>
                                 <!-- Nome  -->
@@ -94,13 +96,8 @@
                 </div>
             </div>
 
-            <!-- PARA IMPLEMENTAR BUSCA DINAMICA BY ID/NOME
-           <div class="container-fluid">
 
-               <input class="form-control" type="text" id="productNome" placeholder="Digite o nome do produto para pesquisar"
-                      oninput="buscarProdutoDinamico()" />
-           </div>
-            -->
+
 
             <!-- Tabela Responsiva -->
             <div class="table-responsive">
@@ -115,35 +112,74 @@
                             <th scope="col">Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr th:each="produto : ${produtos}">
+                    <tbody id="tabela-produtos">
+                        <tr th:each="produto : ${listarTodosProduto}">
                             <td th:text="${produto.id}"></td>
                             <td th:text="${produto.nome}"></td>
                             <td th:text="${#numbers.formatDecimal(produto.preco, 1, 'COMMA', 2, 'POINT')}"></td>
                             <td th:text="${produto.quantidade}"></td>
                             <td th:text="${produto.descricao}"></td>
                             <td>
-                                <!-- Botão de Exclusão -->
-                                <form th:action="@{/produtos/delete/{id}(id=${produto.id})}" method="post" style="display:inline;">
+                                <!-- exclusão -->
+                                <form th:action="@{/produtos/deletarProduto/{id}(id=${produto.id})}" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                                 </form>
-                                <!-- Botão de Edição -->
-                                <a th:href="@{/produtos/edit/{id}(id=${produto.id})}" class="btn btn-primary btn-sm">Editar</a>
+
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+                                        th:data-bs-target="'#modalEditar_' + ${produto.id}">
+                                    Editar
+                                </button>
+
+                                <!-- MODAL para utilizar O PUT -->
+                                <div class="modal fade" th:id="'modalEditar_' + ${produto.id}" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form th:action="@{/produtos/cadastro}" method="POST">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalEditarLabel">Editar Fornecedor</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="nome" class="form-label">Nome</label>
+                                                        <input type="text" id="nome" name="nome" class="form-control" th:value="${produto.nome}" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="preco" class="form-label">Preço</label>
+                                                        <input type="text" id="preco" name="preco" class="form-control" th:value="${#numbers.formatDecimal(produto.preco, 1, 'COMMA', 2, 'POINT')}" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="quantidade" class="form-label">Quantidade</label>
+                                                        <input type="number" id="quantidade" name="quantidade" class="form-control" th:value="${produto.quantidade}" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="descricao" class="form-label">Descrição</label>
+                                                        <input type="text" id="descricao" name="descricao" class="form-control" th:value="${produto.descricao}" required>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                    <!-- passando o id para o modal -->
+                                                    <input type="hidden" name="id" th:value="${produto.id}"/>
+                                                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
         </div>
+
         <footer id="footer">
             <div id="abaixo">
-
-
                 <div class="redeSociaisRodape">
                     <div class="insta">
-                        <img class=" fotoLogoSocial" th:src="@{/images/insta.jpg}" alt="Insta">
-                        <img class="fotoLogoSocial" th:src="@{/images/face.jpg}" alt="FACE">
+                        <img class="fotoLogoSocial" th:src="@{/images/insta.jpg}" alt="insta">
+                        <img class="fotoLogoSocial" th:src="@{/images/face.jpg}" alt="face">
                         <img class="fotoLogoSocial" th:src="@{/images/whats.jpg}" alt="whats">
                     </div>
                     <div class="contato">
@@ -153,11 +189,7 @@
                     </div>
                 </div>
             </div>
-
         </footer>
 
-
-
     </body>
-
 </html>
