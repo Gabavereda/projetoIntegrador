@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>projetoIntegrador</name>
 	<description>Apresentação de telas do projeto integrador</description>
+        <packaging>war</packaging>
 	<url/>
 	<licenses>
 		<license/>
@@ -83,5 +84,6 @@
             </plugin>
             
         </plugins>
+        <finalName>${artifactId}</finalName>
     </build>
 </project>
