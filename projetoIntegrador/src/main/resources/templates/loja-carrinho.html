@@ -18,7 +18,7 @@
         <div id="content">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" >Mercado Da Vila</a>s
+                    <a class="navbar-brand" >Mini Mercado</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Relatorios(UpdatePiBanco)</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/montarTabelaRelatorio}">Relatorios</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -66,14 +66,14 @@
 
 
                             <!-- LADO ESQUERDO Carrinho  -->
-                            <div class="col-sm-4" id="cartItems">
+                            <div class="col-md-4" id="cartItems">
                                 <div th:each="item : ${carrinho}" class="cart-item" data-name="${item.produto.id}">
-
+                                    <form th:action="@{/deletarItemCarrinho/{id}(id=${item.id})}" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                                    </form>
                                     <div class="card">
-                                        <div> <form th:action="@{/remover-carrinho}" method="post">
-                                                <input type="hidden" th:name="idProduto" th:value="${item.produto.id}" />
-                                                <button class="btn btn-danger" type="submit">Remover</button>
-                                            </form>
+                                        <div>
+
                                         </div>
                                         <div class="card-body">
                                             <ul class="list-group list-group-flush">
@@ -105,7 +105,7 @@
                     <div class="col-sm-4">
                         <div class="card" id="valorTotalDiv">
                             <p class="card-title">Total Do Carrinho</p>
-                            
+                            <label  class="card-text" >Total: R$ <span  th:text="${total}"></span></label>
                             <label>Total: R$ <span th:text="${total}"></span></label>
                             <label>Total com Pix (10% off): R$ <span th:text="${totalComDescontoPix}"></span></label>
                         </div>
@@ -169,7 +169,6 @@
                                 <div class="col-md-12">
                                     <label for="numeroCartao" class="form-label">Número:</label>
                                     <input type="text" id="numeroCartao" class="form-control">
-                                    <small id="avisoBandeira"> digite 123 para uma bandeira e 321 para outra </small>
                                 </div>
                                 <div class="col-md-2" id="bandeirasCartoes">
                                     <img class="img-fluid" id="card1" th:src="@{/images/cartao1.png}" alt="logo1">
