@@ -14,21 +14,17 @@ body {
 }
 
 #footer {
-    background-color: rgba(4, 19, 1, 0.801);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #1e2b1b;
     color: #f8f8f8;
-
     box-shadow: 0 -5px 2px rgb(233, 9, 9);
-
     position: relative;
     width: 100%;
-
-
     text-align: center;
     padding: 10px;
     margin-top: 2em;
     /* Garantir que o rodapé não grude no conteúdo */
 }
-
 .fotoLogoSocial {
     width: 2.2em;
     height: 2.2em;
@@ -40,12 +36,12 @@ body {
 /* CADASTRO */
 #formsFinal {
     display: inline-block;
-    margin-top: 2em;
+    margin-top: 1em;
     background-color: rgba(28, 129, 8, 0.801);
 }
 
 #formulario {
-    margin-top: 2em;
+    margin-top: 1em;
     padding: 1em;
 }
 

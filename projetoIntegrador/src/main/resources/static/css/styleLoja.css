@@ -12,6 +12,7 @@ body {
     /* Espaço para o rodapé */
 }
 
+
 #footer {
     background-color: rgba(4, 19, 1, 0.801);
     color: #f8f8f8;
@@ -23,18 +24,11 @@ body {
     margin-top: 2em;
 
 }
-.focused {
-    outline: 2px solid #28a745;
-    background-color: #dff0d8;
+#mensagemCart{
+    float: left;
+    size: 15em;
 }
 
-#mensagemCart {
-    position: absolute;
-    top: 37em;
-    left: 10px;
-    border-radius: 8px;
-
-}
 
 
 #buscaProdutos {
@@ -50,7 +44,9 @@ body {
 
 #carrosante {
     background-color: #9ba798ad;
+
     width: auto;
+
 }
 
 
@@ -58,23 +54,24 @@ body {
 
 #carouselExampleAutoplaying {
     margin-top: 1em;
-
+    padding: 1em;
     max-width: 100%;
     /* Garante centralização */
 
 }
 
 #carouselExampleAutoplaying .carousel-item img {
-
-    max-width:50em;
-    margin:  auto;
+    max-width: 950px;
+    margin: 0 auto;
 
 }
 
 #carouselExampleAutoplaying .carousel-control-prev,
 #carouselExampleAutoplaying .carousel-control-next {
     width: 35px;
+    /* Menor largura para os botões */
     background-color: rgba(255, 0, 0, 0.747);
+    /* Ajusta a largura do botão para torná-lo menor */
 }
 
 #carouselExampleAutoplaying .carousel-control-prev {
@@ -91,18 +88,14 @@ body {
     padding: 1em;
     float: right;
     margin-right: 20em;
+
 }
+
 
 /* Cards responsivos */
 
-.input-group{
-    text-align: center;
-    align-content: center;
-}
-
-
 #cardsProdutos .card-img-top {
-    width: 60%;
+    width: 55%;
     position: center;
     margin: auto;
 }
@@ -110,9 +103,6 @@ body {
 #cardsProdutos .card {
     transition: transform 0.3s;
     max-width:15em;
-
-
-    /* Garante que os cards não ultrapassem a largura máxima */
     height: auto;
 
 }
@@ -124,31 +114,24 @@ body {
 #cardsProdutos {
     justify-content: start;
     margin-top: 1em;
+    gap: 2em;
 
+    /* Aumentar o espaçamento se necessário */
 }
 
 /* Estilo para o card-footer */
 #cardQuantidaPreco {
+
     text-align: center;
 }
 
 .container-fluid.todosCards {
-    margin-top: 2em;
+    margin-top: 1em;
     display: flex;
 
 }
 
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
-    .singleCard {
-        width: 65%;
-        /* Garante que os cards ocupem toda a largura disponível em telas pequenas */
-        max-width: 300px;
-        /* Define a largura máxima para os cards */
-        margin: 0 auto;
-        /* Centraliza os cards */
-    }
-}
+
 
 .fotoLogoSocial {
     width: 2.2em;
