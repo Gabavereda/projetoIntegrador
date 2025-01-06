@@ -141,9 +141,9 @@ $(document).ready(function () {
         cardIcon2.hide();
         cardMessage.hide();
 
-        if (cardNumber.startsWith("123")) {
+        if (cardNumber.startsWith("1234")) {
             cardIcon1.show();
-        } else if (cardNumber.startsWith("321")) {
+        } else if (cardNumber.startsWith("4321")) {
             cardIcon2.show();
         } else if (cardNumber.length >= 4) {
             cardMessage.show();
