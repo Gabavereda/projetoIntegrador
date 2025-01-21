@@ -1,0 +1,11 @@
+ # Arquivos gerados pelo NetBeans
+              nbproject/private/
+              build/
+              nbbuild/
+              dist/
+              nbdist/
+              # Arquivos gerados pelo Spring Boot
+              target/
+              mvnw
+              mvnw.cmd
+              *.jar
