@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+ 
+              # Arquivos gerados pelo Spring Boot
+                         target/       
+                                mvnw        
+                                      mvnw.cmd     
+                                              *.jar
